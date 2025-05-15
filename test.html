@@ -14,8 +14,8 @@
     function sendMessageToApp() {
       if (window.jsBridge && typeof window.jsBridge.invokeFunction === 'function') {
 
-        const data = {InvokeType: "FUNCTION", FunctionName: "NFC_SCAN", FunctionParameter: null};
-        window.jsBridge.invokeFunction(JSON.stringify(data));
+        const data = JSON.stringify({InvokeType: "FUNCTION", FunctionName: "NFC_SCAN", FunctionParameter: null});
+        window.jsBridge.invokeFunction(data);
         
       } else {
         alert("invokeFunction is NOT a function");

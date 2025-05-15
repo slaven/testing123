@@ -9,6 +9,8 @@
   <h1>Send Message to Xamarin App</h1>
   <button onclick="sendMessageToApp()">Send Message</button>
 
+  <button onclick="javascript:invokeCSharpAction({InvokeType: "FUNCTION", FunctionName: "NFC_SCAN", FunctionParameter: {}})">Send Message2</button>
+
   <script>
     function sendMessageToApp() {
       const data = {InvokeType: "FUNCTION", FunctionName: "NFC_SCAN", FunctionParameter: {}};

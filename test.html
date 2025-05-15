@@ -11,7 +11,7 @@
 
   <script>
     function sendMessageToApp() {
-      const data = {InvokeType: "FUNCTION", FunctionName: "NFC_SCAN"};
+      const data = {InvokeType: "FUNCTION", FunctionName: "NFC_SCAN", FunctionParameter: {}};
       window.webkit.messageHandlers.invokeAction.postMessage(data);
     }
   </script>

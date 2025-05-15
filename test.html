@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Send Message to App</title>
+</head>
+<body>
+
+  <h1>Send Message to Xamarin App</h1>
+  <button onclick="sendMessageToApp()">Send Message</button>
+
+  <script>
+    function sendMessageToApp() {
+      const message = "Hello from WebView!";
+
+      // For Android (Xamarin): Call the C# function via injected JS interface
+      if (window.jsBridge && typeof window.jsBridge.postMessage === 'function') {
+        window.jsBridge.postMessage(message);
+      }
+
+      // For iOS (Xamarin): Use WebKit message handler
+      if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.jsBridge) {
+        window.webkit.messageHandlers.jsBridge.postMessage(message);
+      }
+    }
+  </script>
+
+</body>
+</html>

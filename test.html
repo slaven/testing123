@@ -11,17 +11,8 @@
 
   <script>
     function sendMessageToApp() {
-      const message = "Hello from WebView!";
-
-      // For Android (Xamarin): Call the C# function via injected JS interface
-      if (window.jsBridge && typeof window.jsBridge.postMessage === 'function') {
-        window.jsBridge.postMessage(message);
-      }
-
-      // For iOS (Xamarin): Use WebKit message handler
-      if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.jsBridge) {
-        window.webkit.messageHandlers.jsBridge.postMessage(message);
-      }
+      const data = {InvokeType: "FUNCTION", FunctionName: "NFC_SCAN"};
+      window.webkit.messageHandlers.invokeAction.postMessage(data);
     }
   </script>
 

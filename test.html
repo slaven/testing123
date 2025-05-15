@@ -14,7 +14,9 @@
   <script>
     function sendMessageToApp() {
       const data = {InvokeType: "FUNCTION", FunctionName: "NFC_SCAN", FunctionParameter: {}};
-      window.webkit.messageHandlers.invokeAction.postMessage(data);
+      if (window.jsBridge && typeof window.jsBridge.postMessage === 'function') {
+        window.jsBridge.postMessage(message);
+      }
     }
   </script>
 

@@ -8,34 +8,18 @@
 
   <h1>Send Message to Xamarin App</h1>
   <button onclick="showAlert()">alrt</button>
-  <button onclick="sendMessageToApp()">Send Message!!!</button>
-  
-  <button onclick="invokeCSharpAction({InvokeType: "FUNCTION", FunctionName: "NFC_SCAN", FunctionParameter: null})">Send Message2</button>
-  <button onclick="invokeFunction({InvokeType: "FUNCTION", FunctionName: "NFC_SCAN", FunctionParameter: null})">invokeFunction</button>
+  <button onclick="sendMessageToApp()">Send Message2</button>
 
   <script>
     function sendMessageToApp() {
-      if (window.jsBridge) {
-        alert("jsBridge ok");
-      } else {
-        alert("jsBridge NOT ok");
-      }
-      
-      if (typeof window.jsBridge.invokeCSharpAction === 'function') {
-        alert("invokeCSharpAction is a function");
-      } else {
-        alert("invokeCSharpAction is NOT a function");
-      }
+      if (window.jsBridge && typeof window.jsBridge.invokeFunction === 'function') {
 
-      if (typeof window.jsBridge.invokeFunction === 'function') {
-        alert("invokeFunction is a function");
+        const data = {InvokeType: "FUNCTION", FunctionName: "NFC_SCAN", FunctionParameter: null};
+        window.jsBridge.invokeFunction(JSON.stringify(data));
+        
       } else {
         alert("invokeFunction is NOT a function");
       }
-      
-      const data = {InvokeType: "FUNCTION", FunctionName: "NFC_SCAN", FunctionParameter: null};
-      window.jsBridge.invokeFunction(data);
-
     }
   </script>
 

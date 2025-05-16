@@ -8,10 +8,11 @@
 
   <h1>NFC test</h1>
   <button onclick="showAlert()">Alert test</button><br/><br/>
-  <button onclick="requestNfcScanOnce()">Read NFC Once</button><br/><br/>
+  <button onclick="nfcScanOnce()">Read NFC Once</button><br/><br/>
 
-  <button id="nfc-start" onclick="startNfcScan()">Start NFC</button><br/><br/>
-  <button id="nfc-stop" onclick="stopNfcScan()">Stop NFC</button><br/>
+  <button onclick="nfcScanStart()">Start NFC</button><br/><br/>
+  <button onclick="nfcScanStop()">Stop NFC</button><br/><br/>
+  <button onclick="nfcScanStatus()">NFC is scanning?</button><br/><br/>
   <hr>
   <div id="nfc-log"></div>
   
@@ -32,23 +33,28 @@
       div.innerHTML += "- " + rsp + "<br/>";
     }
     
-    function requestNfcScanOnce() {
+    function nfcScanOnce() {
       const result = invokeMposFunction("NFC_SCAN");
       logResponse(result);
     }
 
-    function startNfcScan() {
+    function nfcScanStart() {
       const result = invokeMposFunction("NFC_SCAN_START");
       logResponse(result);
     }
 
-    function stopNfcScan() {
+    function nfcScanStop() {
       const result = invokeMposFunction("NFC_SCAN_STOP");
       logResponse(result);
     }
 
+    function nfcScanStatus() {
+      const result = invokeMposFunction("NFC_IS_SCANNING");
+      logResponse(result);
+    }
+
     function handleNfcResult(rsp) {
-      logResponse("SCAN RESULT: " + rsp);
+      logResponse("handleNfcResult: " + rsp);
     }
   </script>
 

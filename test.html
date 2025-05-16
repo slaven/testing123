@@ -45,6 +45,10 @@
       const result = invokeMposFunction("NFC_SCAN_STOP");
       logResponse(result);
     }
+
+    function handleNfcResult(rsp) {
+      logResponse("SCAN RESULT: " + rsp);
+    }
   </script>
 
 </body>

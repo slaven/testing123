@@ -6,21 +6,44 @@
 </head>
 <body>
 
-  <h1>Send Message to Xamarin App</h1>
-  <button onclick="showAlert()">alrt</button>
-  <button onclick="sendMessageToApp()">Get NFC</button>
+  <h1>NFC test</h1>
+  <button onclick="showAlert()">Alert test</button><br/><br/>
+  <button onclick="requestNfcScanOnce()">Read NFC Once</button><br/><br/>
 
+  <button id="nfc-start" onclick="startNfcScan()">Start NFC</button><br/>
+  <button id="nfc-stop" onclick="stopNfcScan()">Stop NFC</button><br/>
+  <div id="nfc-log"></div>
+  
   <script>
-    function sendMessageToApp() {
+    function invokeMposFunction(functionName) {
       if (window.jsBridge && typeof window.jsBridge.invokeFunction === 'function') {
-
-        const data = JSON.stringify({InvokeType: "FUNCTION", FunctionName: "NFC_SCAN"});
-        const result = window.jsBridge.invokeFunction(data);
-        alert(result);
-        
+        // JSON.stringify()
+        const data = "{InvokeType: \"FUNCTION\", FunctionName: \""+ functionName +"\"}";
+        return window.jsBridge.invokeFunction(data);
       } else {
-        alert("invokeFunction is NOT a function");
+        alert("jsBridge not found or invokeFunction() is not a function");
+        return false;
       }
+    }
+
+    function logResponse(rsp) {
+      var div = document.getElementById('nfc-log');
+      div.innerHTML += rsp;
+    }
+    
+    function requestNfcScanOnce() {
+      const result = invokeMposFunction("NFC_SCAN");
+      logResponse(result);
+    }
+
+    function startNfcScan() {
+      const result = invokeMposFunction("NFC_SCAN_START");
+      logResponse(result);
+    }
+
+    function stopNfcScan() {
+      const result = invokeMposFunction("NFC_SCAN_STOP");
+      logResponse(result);
     }
   </script>
 
